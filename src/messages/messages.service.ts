@@ -7,7 +7,7 @@ import { Message } from './entities/message.entity';
 export class MessagesService {
   message: Message[] = [
     {
-      name: 'Peeratchia',
+      name: 'Peeratchai',
       text: 'Hello',
     },
   ];
@@ -25,8 +25,11 @@ export class MessagesService {
     return this.clientToUser[clientId];
   }
 
-  create(createMessageDto: CreateMessageDto) {
-    const message = { ...createMessageDto };
+  create(createMessageDto: CreateMessageDto, clientId:string) {
+    const message = {
+      name: this.clientToUser[clientId],
+      text: createMessageDto.text
+    }
     this.message.push(createMessageDto); //TODO: improve
     return message;
   }
